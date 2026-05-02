@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stable-depeg-radar"
+version = "0.1.0"
+description = "Stablecoin depeg early-warning radar (USDT/USDC/DAI/FRAX/USDe) powered by ChainStream Pairs cube, with optional Claude AI reasoning."
+requires-python = ">=3.11"
+license = { text = "MIT" }
+readme = "README.md"
+authors = [{ name = "witness1993x" }]
+keywords = [
+  "stablecoin",
+  "depeg",
+  "chainstream",
+  "graphql",
+  "ethereum",
+  "polygon",
+  "ai-agent",
+  "claude",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Financial and Insurance Industry",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Office/Business :: Financial",
+]
+dependencies = []  # pure stdlib runtime — no requests, no aiohttp
+
+[project.optional-dependencies]
+ai-reasoning = ["anthropic>=0.40"]
+dev = ["pytest>=8.0"]
+
+[project.urls]
+Homepage = "https://github.com/witness1993x/stable-depeg-radar"
+Issues = "https://github.com/witness1993x/stable-depeg-radar/issues"
+
+[project.scripts]
+stable-radar = "stable_depeg_radar.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

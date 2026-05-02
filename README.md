@@ -1,5 +1,11 @@
 # stable-depeg-radar
 
+[![CI](https://github.com/witness1993x/stable-depeg-radar/actions/workflows/ci.yml/badge.svg)](https://github.com/witness1993x/stable-depeg-radar/actions/workflows/ci.yml)
+[![License](https://img.shields.io/github/license/witness1993x/stable-depeg-radar)](./LICENSE)
+[![Stars](https://img.shields.io/github/stars/witness1993x/stable-depeg-radar?style=social)](https://github.com/witness1993x/stable-depeg-radar/stargazers)
+[![Issues](https://img.shields.io/github/issues/witness1993x/stable-depeg-radar)](https://github.com/witness1993x/stable-depeg-radar/issues)
+[![Last commit](https://img.shields.io/github/last-commit/witness1993x/stable-depeg-radar/main)](https://github.com/witness1993x/stable-depeg-radar/commits/main)
+
 > Multichain stablecoin depeg early-warning radar powered by **ChainStream** GraphQL, with optional **Claude AI** reasoning.
 
 `stable-depeg-radar` polls the ChainStream `DEXTrades` cube on **Ethereum, Polygon, BSC, and Arbitrum**, reads recent USD prices for the major stables (`USDT`, `USDC`, `DAI`, `FRAX`, `USDe`, `USDS`) and raises an alert whenever the median trade price drifts from `$1` by more than a configurable basis-point threshold. Severity tiers are tuned to surface real depeg-style events (USDC/SVB-2023, UST/Terra-2022) rather than DEX micro-noise.

@@ -1,0 +1,47 @@
+name: ci
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    name: build-${{ matrix.os }}-${{ matrix.runtime }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        node-version: ["20"]
+        python-version: ["3.11"]
+        runtime: ["python"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        if: matrix.runtime == 'node' || matrix.runtime == 'typescript' || matrix.runtime == 'javascript'
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+
+      - name: Setup Python
+        if: matrix.runtime == 'python'
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -e ".[dev]"
+
+      - name: Build
+        run: |
+          pip install --quiet build
+          python -m build
+
+      - name: Test
+        run: pytest -q
